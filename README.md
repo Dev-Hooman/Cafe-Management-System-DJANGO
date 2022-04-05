@@ -1,6 +1,23 @@
 # Cafe-Management-System-DJANGO
  This Repository consists of  Web Application which is Developed in Django (the framework of python)
  
+ # Django Databse Settings
+ 
+ settings.py
+ 
+ ```
+ DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django_admin_log',
+        'USER' : 'root',
+        'PASSWORD' : '',
+        'HOST' : 'localhost',
+        'PORT' : '3306',
+    }
+}
+```
+ 
  ## USE XAMP for MYSQL
 following how xamp will looks like
 
