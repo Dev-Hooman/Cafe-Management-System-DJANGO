@@ -5,8 +5,6 @@ from tabnanny import verbose
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-
-
 class MyAccountManager(BaseUserManager):
     #creating a new user  (over Writing the existing one)
     def create_user(self, email, username, password=None):
