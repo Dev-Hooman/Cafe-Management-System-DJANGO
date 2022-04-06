@@ -13,7 +13,10 @@
 <body>
     <br>
     <br>
-    <br> {% load static %}
+    <br>
+
+
+    {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css'%}">
     <div class="login-box">
         <h2>Sign up</h2>
@@ -50,7 +53,7 @@
             </div>
 
             <div class="user-box">
-                <input class="-webkit-datetime-edit" type="date" name="user_DOB" id="inputuser_DOB" required="">
+                <input class="-webkit-datetime-edit" type="date" name="user_DOB"  id="inputuser_DOB" required="">
                 <label>Date Of Birth</label>
             </div>
 
@@ -60,20 +63,21 @@
             </div>
 
             <div class="user-box">
-                <input type="text" name="Address" id="Address" required="">
+                <input type="text" name="Address"  id="Address" required="">
                 <label>Address</label>
             </div>
 
             {% for field in registration_form %}
             <p>
                 {% for error in field.errors %}
-                <p style="color: red">{{ error }}</p>
+                    <p style="color: red">{{ error }}</p>
                 {% endfor %}
             </p>
-            {% endfor %} {% if registration_form.non_field_errors %}
-            <div style="color: red">
-                <p>{{ registration_form.non_field_errors }}</p>
-            </div>
+            {% endfor %}
+            {% if registration_form.non_field_errors %}
+                <div style="color: red">
+                    <p>{{ registration_form.non_field_errors }}</p>
+                </div>
 
             {% endif %}
 
@@ -88,7 +92,7 @@
 
 
         </form>
-        <center style="color: #03e9f4;">Already an account <a href="/users/login"> Login </a></div>
+        <center style="color: #03e9f4;">Already an account <a href="\login"> Login </a></div>
     </center>
 
 
@@ -101,7 +105,7 @@
             <li>
                 <div>
                     {% load static %}
-                    <a href="http://127.0.0.1:8000"><img src={% static 'float_home.png' %} alt="home"></a>
+                    <a href="http://192.168.10.8:8000"><img src={% static 'float_home.png' %} alt="home"></a>
                 </div>
             </li>
         </ul>

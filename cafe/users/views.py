@@ -52,7 +52,7 @@ def signup_view(request, *args, **kwargs):
             destination = kwargs.get("next")
             if destination:
                 return redirect(destination)
-            return redirect('users')
+            return redirect('/users')
         else:
             context ['registration_form'] = form
     else:
