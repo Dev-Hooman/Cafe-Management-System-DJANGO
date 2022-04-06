@@ -51,7 +51,7 @@
 
 
     <nav class="navbar sticky-top navbar-light bg-light">
-        <a class="navbar-brand text-center " href="#"> <b>SZABIST CAFE</b> </a>
+        <a class="navbar-brand text-center " href="http://127.0.0.1:8000"> <b>SZABIST CAFE</b> </a>
         {% if user.is_authenticated %}
         <div class="dropdown">
             <a class="btn btn-secondary dropdown-toggle py-1" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,25 +59,34 @@
                 <img src={% static 'profile/default_user.png' %} alt="">
                 {{request.user.username}}
             </a>
-          
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" href='/users'>Profile</a>
-              <a class="dropdown-item" href="#">Account Settings</a>
-              <a class="dropdown-item" href={% url 'logout' %}>Logout</a>
-            </div>
-          </div>
-          {% else %}
-        <ul class="navbar-nav">
-                <div>
-                    <a href="users/login">
-                        <button class="btn">Login</button>
-                    </a>
 
-                    <a href="users/signup">
-                        <button class="btn">Sign up</button>
-                    </a>
-                </div>
-                
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href='/users'>
+                    {% load static %}
+                    <img src={% static 'profile/account.png' %} alt=""> Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                    {% load static %}
+                    <img src={% static 'profile/Settings.png' %} alt=""> Account Settings
+                </a>
+                <a class="dropdown-item" href={% url 'logout' %}>
+                    {% load static %}
+                    <img src={% static 'profile/logout.png' %} alt="">Logout
+                </a>
+            </div>
+        </div>
+        {% else %}
+        <ul class="navbar-nav">
+            <div>
+                <a href="users/login">
+                    <button class="btn">Login</button>
+                </a>
+
+                <a href="users/signup">
+                    <button class="btn">Sign up</button>
+                </a>
+            </div>
+
 
             </li>
 
@@ -97,7 +106,7 @@
 
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a style="color:#03e9f4" class="nav-link" href="http://192.168.10.8:8000/">Home <span class="sr-only">(current)</span></a>
+                    <a style="color:#03e9f4" class="nav-link" href="http://127.0.0.1:8000">Home <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item dropdown">

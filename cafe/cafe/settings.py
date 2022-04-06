@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'cafe.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_admin_log',
+        'NAME': 'szabist_cafe',
         'USER' : 'root',
         'PASSWORD' : '',
         'HOST' : 'localhost',
