@@ -7,6 +7,9 @@ from django.urls import reverse
 
 #importing forms
 from users.forms import RegistrationForm
+
+#for messages
+from django.contrib import messages
 #------------------------------------------------------------
 
 def index(request):
@@ -62,7 +65,8 @@ def signup_view(request, *args, **kwargs):
     
 def logout_view(request):
     logout(request)
-    return render(request, "users/login.html" , 
+    messages.success(request, 'You have successfully logged out!')
+    return render(request, "index.html" , 
     {
         "message" : "Logged out."
     }
