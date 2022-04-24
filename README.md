@@ -28,7 +28,7 @@ following how xamp will looks like
 Makemigrations
 
 ```
-python manage.py makemigrations
+python manage.py makemigrations <app_name>
 ```
 
 Migrate
