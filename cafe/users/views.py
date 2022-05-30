@@ -1,4 +1,5 @@
 from mimetypes import init
+from ssl import SSL_ERROR_INVALID_ERROR_CODE
 from django.contrib.auth import authenticate, login , logout
 from django.shortcuts import render, redirect 
 # redirect helps to push back to url as arg
@@ -66,7 +67,7 @@ def signup_view(request, *args, **kwargs):
 def logout_view(request):
     logout(request)
     messages.success(request, 'You have successfully logged out!')
-    return render(request, "index.html" , 
+    return render(request, "home/index.html" , 
     {
         "message" : "Logged out."
     }

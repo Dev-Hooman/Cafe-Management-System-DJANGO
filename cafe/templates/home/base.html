@@ -7,9 +7,11 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title> {% block title %} {% endblock title %} | Szabist Cafe</title>
-
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'icons/favicon.ico' %}">
     <style>
         body {
             margin: 0;
@@ -17,41 +19,95 @@
             font-family: sans-serif;
             background: linear-gradient(#243b55);
         }
+
+        .stylish-heading{
+
+            font-family: 'Brush Script MT', cursive
+        }
         
         .form-control:focus {
             border-color: #9198a0;
             box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #d6d8da;
         }
         
-        .btn {
+        .btn2 {
             border: 2px solid black;
             border-color: #03e9f4;
             color: #03e9f4;
         }
         
-        .btn:hover {
+        .btn2:hover {
             border-color: #03e9f4;
             background: #03e9f4;
             color: #fff;
             border-radius: 5px;
             box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4, 0 0 100px #03e9f4;
         }
+        .btn-outline-secondary{
+
+            color: #243b55;
+            
+        }
         
         .navbar-toggler-icon {
             background-image: url('https://mdbootstrap.com/img/svg/hamburger2.svg?color=fff');
         }
+
+        .nav-link{
+            color: inherit;
+            text-decoration: none;
+            margin-right: 50px;
+            position: relative;
+            font-family: "Raleway", sans-serif;
+            padding: 16px 0;
+            margin: 0 12px;
+            letter-spacing: 1px;
+            line-height: 16px;
+            font-weight: 700;
+            transition: ccolor 0.1s, background-color 0.1s, padding 0.2s ease-in;
+            color: #fff;
+        }
+
+        .nav-link::before{
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 3px;
+            left: 0;
+            height: 3px;
+            width: 100%;
+            background-color: #fff;
+            transform-origin: right top;
+            transform: scale(0,1);
+            transition: color 0.1s, transform 0.2s ease-out;
+        }
+
+        .nav-link:hover::before,
+        .nav-link:focus::before{
+            transform-origin: left top;
+            transform: scale(1,1);
+        }
+        
+    
+        
+
+
+        
     </style>
+
+    
+
 
 </head>
 
 <body>
 
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'CSS/styles.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css'%}">
 
 
     <nav class="navbar sticky-top navbar-light bg-light">
-        <a class="navbar-brand text-center " href="http://127.0.0.1:8000"> <b>SZABIST CAFE</b> </a>
+        <a class="navbar-brand text-center " href="/"> <b>SZABIST CAFE</b> </a>
         {% if user.is_authenticated %}
         <div class="dropdown">
             <a class="btn btn-secondary dropdown-toggle py-1" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -78,12 +134,12 @@
         {% else %}
         <ul class="navbar-nav">
             <div>
-                <a href="users/login">
-                    <button class="btn">Login</button>
+                <a href="/users/login">
+                    <button class="btn btn2">Login</button>
                 </a>
 
-                <a href="users/signup">
-                    <button class="btn">Sign up</button>
+                <a href="/users/signup">
+                    <button class="btn btn2">Sign up</button>
                 </a>
             </div>
 
@@ -95,7 +151,7 @@
     </nav>
 
     <nav class="navbar navbar-expand-lg " style="background-color: rgb(0, 75, 146)">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             {% load static %}
             <img src={% static 'Logo/main_logo.jpeg' %} alt="logo" class="navbar-brand py-0"> 
         </a>
@@ -106,9 +162,10 @@
 
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a style="color:#03e9f4" class="nav-link" href="http://127.0.0.1:8000">Home <span class="sr-only">(current)</span></a>
+                    <a style="color:#03e9f4" class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
 
+                <!-- ADD THIS LATER WHEN REQUIRED
                 <li class="nav-item dropdown">
                     <a style="color:#03e9f4" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Our Food
@@ -119,22 +176,38 @@
                         <a class="dropdown-item" href="#">Drinks</a>
                     </div>
                 </li>
-
+                -->
                 <li class="nav-item">
-                    <a style="color:#03e9f4" class="nav-link" href="/aboutus">About us</a>
+                    <a style="color:#03e9f4" class="nav-link" href="/food">Our Food</a>
                 </li>
 
                 <li class="nav-item">
-                    <a style="color:#03e9f4" class="nav-link" href="/contactus">Contact-us</a>
+                    <a style="color:#03e9f4" class="nav-link" href="/about">About us</a>
+                </li>
+
+                <li class="nav-item">
+                    <a style="color:#03e9f4" class="nav-link" href="/contact">Contact-us</a>
                 </li>
 
             </ul>
-
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn  my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn2 my-2 my-sm-0" type="submit">Search</button>
             </form>
-        </div>
+
+
+            <div class="form-inline my-2 my-lg-0">
+                
+                <a href="{% url 'cart' %}">
+                   <img  id="cart-icon" src="{% static 'icons/cart.png' %}">
+               </a>
+               <p id="cart-total">0</p>
+   
+           </div>
+
+
+       </div>
+
     </nav>
 
     <!------------------------------------------------------>
@@ -155,14 +228,41 @@
     <! here index body is placed>
 
 
-    {% block body %} {% endblock body %}
+    {% block body %} 
+    
+    
+    
+   
+    {% endblock body %}
 
 
+    
+
+	<footer class="footer-distributed">
+
+		<div class="footer-right">
+			<a href="#"><i class="fa fa-facebook"></i></a>
+			<a href="#"><i class="fa fa-twitter"></i></a>
+			<a href="#"><i class="fa fa-linkedin"></i></a>
+			<a href="#"><i class="fa fa-github"></i></a>
+		</div>
+
+		<div class="footer-left">
+			<p class="footer-links">
+				<a class="link-1" href="#">About</a>
+				<a href="#">Faq</a>
+				<a href="#">Contact</a>
+			</p>
+			<p>SZABIST CAFE &copy; 2022</p>
+		</div>
+
+	</footer>
 
     <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

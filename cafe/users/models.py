@@ -1,5 +1,6 @@
 from email.policy import default
 from enum import unique
+from operator import truediv
 from pickle import TRUE
 from tabnanny import verbose
 from django.db import models
@@ -35,7 +36,6 @@ class MyAccountManager(BaseUserManager):
     
 
 class userAccount(AbstractBaseUser):
-
     username        = models.CharField(max_length=20, unique=True)
     email           = models.EmailField(verbose_name = "email", max_length=60, unique=True)
     phone_number    = models.IntegerField(null=True)
