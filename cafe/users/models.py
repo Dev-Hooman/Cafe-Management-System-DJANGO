@@ -38,7 +38,7 @@ class MyAccountManager(BaseUserManager):
 class userAccount(AbstractBaseUser):
     username        = models.CharField(max_length=20, unique=True)
     email           = models.EmailField(verbose_name = "email", max_length=60, unique=True)
-    phone_number    = models.IntegerField(null=True)
+    phone_number    = models.CharField(max_length=50)
     gender          = models.CharField(max_length=10, unique=False, null=True)
     Address         = models.CharField(max_length=100, unique=True, null=True)
     user_DOB        = models.DateField(null=True)

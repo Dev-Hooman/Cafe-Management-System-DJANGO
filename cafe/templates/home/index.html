@@ -54,13 +54,125 @@
     </div>
 </div>
 
+
+
+<div class="container" xmlns:data="http://www.w3.org/1999/xhtml">
+
+<div class="testimonial-heading stylish-heading ">
+    <h1>New In The Food...</h1>
+</div>
 <br>
 
+   <h6 class=" stylish-heading text-white">Category</h6>
+   <form method="POST" action="/">
+      {% csrf_token %}
+      <select name="my_cat" id="my_cat" class="my-custom-select" onchange="this.form.submit();" aria-label="Default select example">
+         <div slot="button">
+            <button behavior="button">Open</button>
+            <span class="label">Choose an option</span>
+          </div>
+         <option selected>Select Here</option>
+         <option value="Dessert">Dessert</option>
+         <option value="Drinks">Drinks</option>
+         <option value="Fast Food">Fast Food</option>
+       </select>
+   </form>
+
+
+
+   {% for product, range, nSlides in allProds %}
+   <h4 class= "stylish-heading my2 text-center text-white ">{{product.0.category}}</h4>
+   <div id="demo{{forloop.counter}}" class="carousel slide my-3" data-ride="carousel">
+   
+      <ul class="carousel-indicators c-i">
+         <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
+         {% for i in range %}
+         <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}" ></li>
+         {% endfor %}
+      </ul>
+
+      <div class="carousel-inner">
+         <div class="carousel-item active">
+
+            {% for list in product %}
+            <div  class="col-xs-3 col-sm-3 col-md-3">
+               <div class="card" style="width: 18rem;">
+                  <img style="width: 100%; height: 200px; object-fit: contain;" src='/media/{{list.image}}' class="card-img-top" alt="...">
+                  <div class="card-body">
+                     <h5 class="card-title">{{list.product_name}}</h5>
+                     <p class="card-text">{{list.desc}}
+                     </p>
+                     <button id="pr{{list.id}}"  type="button" class="cart fa fa-shopping-cart btn btn2 btn-outline-secondary">Add To Cart</button>
+                  </div>
+               </div>
+            </div>
+
+
+            {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+         </div><div class="carousel-item">
+            {% endif %}
+
+            {% endfor %}
+         </div>
+      </div>
+   </div>
+   
+   <a class="carousel-control-prev c-c-p" href="#demo{{forloop.counter}}" data-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next c-c-n" href="#demo{{forloop.counter}}" data-slide="next">
+      <span class="carousel-control-next-icon"></span>
+  </a>
+{% endfor %}
 
 
 
 
-<h1 class="my2 text-center text-white">  Reviews </h1>
+<div class="container">
+    <section id="testimonials">
+        <div class="testimonial-heading stylish-heading ">
+            <h1>Reviews</h1>
+        </div>
+        <h1></h1>
+        <div class="row">
 
+        {% for reviews in usersReview %}
+        <div class="testimonial-box-container">
+            <div class="testimonial-box">
+            
+                <div class="box-top">
+
+                    <div class="profile">
+         
+                        <div class="profile-img">
+                            <img src="https://img.icons8.com/plasticine/100/000000/user.png" alt="Admin" class="rounded-circle" width="150">
+
+                        </div>
+                 
+                        <div class="name-user">
+                            <strong>{{ reviews.reviewer_name }}</strong>
+                            <span>{{ reviews.review_date }}</span>
+                        </div>
+                    </div>
+                    <!--reviews------>
+                    <div class="reviews">
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                    </div>
+                </div>
+                <!--Comments---------------------------------------->
+                <div class="client-comment">
+                    <p>{{ reviews.review }}</p>
+                </div>
+            </div>
+            
+        </div>
+        {% endfor %}
+        
+</div>
 
 {% endblock body %}
+

@@ -15,7 +15,27 @@ from .forms import foodCategory
 
 def Home(request):
 
-    return render(request, "home/index.html")
+    variable1 = request.POST.get('my_cat', 'Drinks')
+
+    #n = len(allProducts)
+    #slides_N = n//4 + ceil((n/4) + (n//4))
+    allProds = []
+    catprods = Product.objects.values('category','product_id')
+    cats = {item['category'] for item in catprods}
+    for cat in cats:
+        if cat == variable1:
+            prod = Product.objects.filter(category=cat)
+            n = len(prod)
+            nSlides = n // 4 + ceil((n / 4) - (n // 4))
+            allProds.append([prod, range(1, nSlides), nSlides])
+
+    usersReview = Reviews.objects.all()
+    context = {
+        'allProds':allProds,
+        'usersReview':usersReview,
+    }
+
+    return render(request, "home/index.html",context)
     #return HttpResponse("Welcome to cafe")
 
 def about(request):
@@ -39,24 +59,14 @@ def cart(request):
     return render(request, 'home/cart.html')
 
 def foodView(request):
-    variable1 = request.POST.get('my_cat', 'default')
+    
 
     
     allProducts = Product.objects.all()
-    #n = len(allProducts)
-    #slides_N = n//4 + ceil((n/4) + (n//4))
-    allProds = []
-    catprods = Product.objects.values('category')
-    cats = {item['category'] for item in catprods}
-    for cat in cats:
-        if cat == variable1:
-            prod = Product.objects.filter(category=cat)
-            n = len(prod)
-            nSlides = n // 4 + ceil((n / 4) - (n // 4))
-            allProds.append([prod, range(1, nSlides), nSlides])
+
 
     context = {
-        'allProds':allProds,
+        
         'food':allProducts,
     }
     
@@ -67,14 +77,13 @@ def checkout(request):
     return render(request, 'home/checkout.html')
 
 def reviewForm(request):
-    '''
-        This model is left for testing 
-    
-    '''
-    r_var = request.POST.get('user_review', "NULL")
-    review_name = request.user.username
-    Myreview = Reviews(reviewer_name= review_name, review = r_var, review_date=dt.today())
-    Myreview.save()
-    messages.success(request, 'Your Review has been submitted')
+    if request.method == "POST":
+        review_desc = request.POST.get('user_review', 'default')
+        review_name = request.user.username
+        Myreview = Reviews(reviewer_name= review_name, review = review_desc, review_date=dt.today())
+        Myreview.save()
+        messages.success(request, 'Your Review has been submitted')
 
-    return render(request, "users/user.html")
+
+
+    return render(request, "home/review.html")

@@ -12,95 +12,16 @@ Product View
    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css'%}">
 
 <br>
-<!-- FOOD SLIDER -->
-
-
-
-<h1 class="stylish-heading my2 text-center text-white">  New In The Food...  </h1>
-<br>
-
-
-
-<div class="container" xmlns:data="http://www.w3.org/1999/xhtml">
-
-   <form method="POST" action="{% url 'food' %}">
-      {% csrf_token %}
-      <select name="my_cat" id="my_cat" class="form-select" aria-label="Default select example">
-         <option selected>Open this select menu</option>
-         <option value="Dessert">Dessert</option>
-         <option value="Drinks">Drinks</option>
-       </select>
-      <button type="submit" class="btn btn-primary">SUBMIT</button>
-
-   </form>
-
-
-
-   {% for product, range, nSlides in allProds %}
-   <h4 class= "stylish-heading my2 text-center text-white ">{{product.0.category}}</h4>
-   <div id="demo{{forloop.counter}}" class="carousel slide my-3" data-ride="carousel">
-   
-      <ul class="carousel-indicators">
-         <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
-         {% for i in range %}
-         <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}" ></li>
-         {% endfor %}
-      </ul>
-
-      <div class="carousel-inner">
-         <div class="carousel-item active">
-            <div  class="col-xs-3 col-sm-3 col-md-3">
-               <div  class="card" style="width: 18rem;">
-                  <img style="width: 100%; height: 200px; object-fit: contain;" src='/media/{{product.0.image}}' class="card-img-top" alt="...">
-                  <div class="card-body">
-                     <h5 class="card-title">{{product.0.product_name}}</h5>
-                     <p class="card-text">{{product.0.desc}}
-                     </p>
-                     <button type="button" class="fa fa-shopping-cart btn btn2 btn-outline-secondary">Add To Cart</button>
-                  </div>
-               </div>
-            </div>
-
-            {% for list in product|slice:"1:" %}
-            <div  class="col-xs-3 col-sm-3 col-md-3">
-               <div class="card" style="width: 18rem;">
-                  <img style="width: 100%; height: 200px; object-fit: contain;" src='/media/{{list.image}}' class="card-img-top" alt="...">
-                  <div class="card-body">
-                     <h5 class="card-title">{{list.product_name}}</h5>
-                     <p class="card-text">{{list.desc}}
-                     </p>
-                     <button type="button" class="fa fa-shopping-cart btn btn2 btn-outline-secondary">Add To Cart</button>
-                  </div>
-               </div>
-            </div>
-
-
-            {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
-         </div><div class="carousel-item">
-            {% endif %}
-
-            {% endfor %}
-         </div>
-      </div>
-   </div>
-   
-   <a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#demo{{forloop.counter}}" data-slide="next">
-      <span class="carousel-control-next-icon"></span>
-  </a>
-{% endfor %}
-
 
 
  <!--MAIN FOOD-->
 <div class="container my-3">
    <br>
-   <h1 class="stylish-heading my2 text-center text-white">  Food That Makes You Visit Again!  </h1>
+   <div class="testimonial-heading stylish-heading ">
+      <h1>Food That Makes You Visit Again! </h1>
+  </div>
     <br>
     <div class="row">
-
       
       {% for f in food %}
       <div class=" col-sm-5 col-lg-4 ">
@@ -110,17 +31,48 @@ Product View
             <p class="card-text"> {{ f.desc }} </p>
             <hr>
             <div class="btn-group">
-               <button type="button" class="fa fa-shopping-cart btn btn2 btn-outline-secondary">Add To Cart</button>
+               <button id="pr{{f.id}}"  type="button" class=" cart fa fa-shopping-cart btn btn2 btn-outline-secondary">Add To Cart</button>
             </div>
-            <h4 style="display: inline-block; float:right; "><strong>{{ f.price }} Rs</strong></h4>
+            <h4 style="display: inline-block;  "><strong>{{ f.price }} Rs</strong></h4>
          </div>
       </div>
       {% endfor %}
- 
 
 <hr>
 
 
 {% endblock body %}
+
+{% block js %}
+<script>
+   console.log('working');
+   if(localStorage.getItem('cart') == null){
+      var cart = {};
+   }
+   else 
+   {
+      cart = JSON.parse(localStorage.getItem('cart'));
+      document.getElementById('cart').innerHTML = Object.keys(cart).length;
+   }
+   $('.cart').click(function(){
+      console.log('clicked');
+      var idstr = this.id.toString();
+      console.log(idstr);
+      if (cart[idstr] != undefined){
+         cart[idstr] = cart[idstr] + 1;
+      }
+      else{
+         cart[idstr] = 1;
+      }
+
+      console.log(cart);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      document.getElementById('cart').innerHTML = Object.keys(cart).length;
+   });
+</script>
+
+
+{% endblock %}
+
 
 

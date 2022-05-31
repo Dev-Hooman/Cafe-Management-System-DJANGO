@@ -130,18 +130,7 @@
                                 <div class="card-body">
                                     <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Reviewd Food</h6>
                                     <p>
-                                        <!-- Reviews of user  -->
-                                        <div class="overlay">
-                                            <form method="POST" action="{% url 'review' %}">
 
-                                                {% csrf_token %}
-                                                <div class="form-group">
-                                                    <label class="text-white" for="desc">Review</label>
-                                                    <textarea class="form-control" id="user_review" name="user_review" rows="3"></textarea>
-                                                </div>
-                                                <button type="submit" class="btn1 btn2 btn-primary">SUBMIT</button>
-                                            </form>
-                                        </div>
                                     </p>
                                 </div>
                             </div>

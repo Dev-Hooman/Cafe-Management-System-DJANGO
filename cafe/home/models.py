@@ -29,8 +29,9 @@ class Product(models.Model):
     
 
 class Reviews(models.Model):
-    reviewer_name = models.CharField(max_length=50)
-    review = models.TextField()
+    review_id = models.AutoField(primary_key=True)
+    reviewer_name = models.CharField(max_length=50, default="")
+    review = models.TextField(default="")
     review_date = models.DateField()
 
     def __str__(self):
