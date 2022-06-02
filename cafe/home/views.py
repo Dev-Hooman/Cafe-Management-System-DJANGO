@@ -11,12 +11,8 @@ from home.models import Reviews
 #for messages
 from django.contrib import messages
 
-from .forms import foodCategory
-
 def Home(request):
-
     variable1 = request.POST.get('my_cat', 'Drinks')
-
     #n = len(allProducts)
     #slides_N = n//4 + ceil((n/4) + (n//4))
     allProds = []
@@ -59,8 +55,6 @@ def cart(request):
     return render(request, 'home/cart.html')
 
 def foodView(request):
-    
-
     
     allProducts = Product.objects.all()
 
